@@ -1,0 +1,1060 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>2026 TN Poll - Tamil Nadu Legislative Assembly Election</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-dark: #0a0e1a;
+            --bg-card: #151a25;
+            --bg-input: #1e2532;
+            --accent-blue: #0ea5e9;
+            --accent-green: #10b981;
+            --accent-orange: #f97316;
+            --text-primary: #ffffff;
+            --text-secondary: #9ca3af;
+            --border-color: #2a3441;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: var(--bg-dark);
+            color: var(--text-primary);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 20px;
+            flex: 1;
+        }
+
+        /* Header */
+        .header-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .header-icon {
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, var(--accent-orange), #ea580c);
+            border-radius: 14px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            flex-shrink: 0;
+        }
+
+        .header-content h1 {
+            font-size: 18px;
+            font-weight: 600;
+            margin-bottom: 4px;
+        }
+
+        .header-content p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        /* Party Cards */
+        .party-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .party-card {
+            background: var(--bg-card);
+            border-radius: 12px;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            cursor: pointer;
+            transition: all 0.2s;
+            border: 1px solid var(--border-color);
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .party-card:hover {
+            transform: translateY(-2px);
+            border-color: var(--accent-blue);
+            box-shadow: 0 4px 20px rgba(14, 165, 233, 0.15);
+        }
+
+        .party-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+        }
+
+        .party-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 22px;
+            flex-shrink: 0;
+        }
+
+        .party-icon.dmk { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+        .party-icon.tvk { background: linear-gradient(135deg, #fbbf24, #d97706); }
+        .party-icon.admk { background: linear-gradient(135deg, #4ade80, #16a34a); }
+        .party-icon.ntk { background: linear-gradient(135deg, #facc15, #eab308); }
+        .party-icon.others { background: linear-gradient(135deg, #60a5fa, #3b82f6); }
+
+        .party-details h3 {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 2px;
+        }
+
+        .party-details span {
+            color: var(--text-secondary);
+            font-size: 13px;
+        }
+
+        .party-stats {
+            text-align: right;
+        }
+
+        .percentage {
+            font-size: 24px;
+            font-weight: 700;
+            margin-bottom: 2px;
+        }
+
+        .invested {
+            color: var(--text-secondary);
+            font-size: 12px;
+        }
+
+        /* Bet Amount Selection Page */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-secondary);
+            text-decoration: none;
+            margin-bottom: 20px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+
+        .back-btn:hover {
+            color: var(--text-primary);
+        }
+
+        .selection-header {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 20px;
+            margin-bottom: 24px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            border: 1px solid var(--border-color);
+        }
+
+        .selection-icon {
+            width: 52px;
+            height: 52px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+        }
+
+        .selection-icon.dmk { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+
+        .selection-info h2 {
+            font-size: 20px;
+            font-weight: 600;
+        }
+
+        .selection-info p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .amount-section h3 {
+            font-size: 14px;
+            color: var(--text-secondary);
+            margin-bottom: 16px;
+            font-weight: 500;
+        }
+
+        .amount-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .amount-btn {
+            background: var(--bg-input);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 16px;
+            color: var(--text-primary);
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .amount-btn:hover {
+            background: var(--bg-card);
+            border-color: var(--accent-blue);
+        }
+
+        .amount-btn.active {
+            background: var(--accent-blue);
+            border-color: var(--accent-blue);
+        }
+
+        .custom-amount {
+            background: var(--bg-input);
+            border: 2px solid transparent;
+            border-radius: 12px;
+            padding: 16px;
+            width: 100%;
+            color: var(--text-primary);
+            font-size: 16px;
+            margin-bottom: 24px;
+            outline: none;
+        }
+
+        .custom-amount:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .custom-amount::placeholder {
+            color: var(--text-secondary);
+        }
+
+        .total-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+        }
+
+        .total-section span {
+            color: var(--text-secondary);
+            font-size: 16px;
+        }
+
+        .total-section strong {
+            font-size: 28px;
+            font-weight: 700;
+        }
+
+        .btn-primary {
+            width: 100%;
+            background: var(--accent-blue);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.3);
+        }
+
+        /* Details Form Page */
+        .form-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px 24px;
+            border: 1px solid var(--border-color);
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 32px;
+        }
+
+        .form-icon {
+            width: 64px;
+            height: 64px;
+            background: var(--bg-input);
+            border-radius: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 16px;
+            font-size: 32px;
+            color: var(--accent-blue);
+        }
+
+        .form-header h2 {
+            font-size: 22px;
+            margin-bottom: 8px;
+        }
+
+        .form-header p {
+            color: var(--text-secondary);
+            font-size: 14px;
+        }
+
+        .selected-party-display {
+            background: var(--bg-input);
+            border-radius: 12px;
+            padding: 16px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 24px;
+        }
+
+        .selected-party-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .selected-party-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+
+        .selected-party-icon.dmk { background: linear-gradient(135deg, #fbbf24, #f59e0b); }
+
+        .selected-party-info span {
+            font-weight: 600;
+            font-size: 16px;
+        }
+
+        .selected-amount {
+            color: var(--accent-blue);
+            font-size: 20px;
+            font-weight: 700;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            color: var(--text-secondary);
+            font-size: 14px;
+            margin-bottom: 8px;
+        }
+
+        .form-group input {
+            width: 100%;
+            background: var(--bg-input);
+            border: 2px solid transparent;
+            border-radius: 10px;
+            padding: 14px 16px;
+            color: var(--text-primary);
+            font-size: 16px;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input:focus {
+            border-color: var(--accent-green);
+        }
+
+        .btn-success {
+            width: 100%;
+            background: var(--accent-green);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            padding: 18px;
+            font-size: 18px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 8px;
+        }
+
+        .btn-success:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(16, 185, 129, 0.3);
+        }
+
+        /* Success Page */
+        .success-card {
+            background: var(--bg-card);
+            border-radius: 16px;
+            padding: 32px 24px;
+            text-align: center;
+            border: 1px solid var(--border-color);
+        }
+
+        .success-icon {
+            width: 80px;
+            height: 80px;
+            background: var(--accent-green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            font-size: 40px;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            0% { transform: scale(0); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .success-card h2 {
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+
+        .success-card > p {
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+        }
+
+        .info-box {
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            border-radius: 12px;
+            padding: 20px;
+            text-align: left;
+            margin-bottom: 24px;
+        }
+
+        .info-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 12px;
+            font-size: 14px;
+        }
+
+        .info-row:last-child {
+            margin-bottom: 0;
+        }
+
+        .info-row span:first-child {
+            color: var(--text-secondary);
+        }
+
+        .info-row span:last-child {
+            font-weight: 600;
+        }
+
+        .potential-win {
+            color: var(--accent-green) !important;
+            font-size: 18px !important;
+        }
+
+        .qr-section {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+        }
+
+        .qr-code {
+            width: 200px;
+            height: 200px;
+            background: #000;
+            margin: 0 auto 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 12px;
+            position: relative;
+        }
+
+        /* Generate QR pattern */
+        .qr-code::before {
+            content: '';
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            background-image: 
+                repeating-linear-gradient(0deg, #000 0px, #000 4px, transparent 4px, transparent 8px),
+                repeating-linear-gradient(90deg, #000 0px, #000 4px, transparent 4px, transparent 8px);
+            background-size: 8px 8px;
+            opacity: 0.1;
+        }
+
+        .qr-section p {
+            color: #333;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .upi-box {
+            background: var(--bg-input);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 20px;
+            text-align: left;
+        }
+
+        .upi-box p {
+            color: var(--text-secondary);
+            font-size: 12px;
+            margin-bottom: 8px;
+        }
+
+        .upi-id {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            color: var(--accent-blue);
+            font-size: 16px;
+            font-weight: 600;
+        }
+
+        .copy-btn {
+            background: none;
+            border: none;
+            color: var(--text-secondary);
+            cursor: pointer;
+            font-size: 18px;
+            padding: 4px;
+        }
+
+        .warning-box {
+            background: rgba(251, 191, 36, 0.1);
+            border: 1px solid rgba(251, 191, 36, 0.2);
+            border-radius: 10px;
+            padding: 16px;
+            margin-bottom: 20px;
+            text-align: left;
+            font-size: 13px;
+            color: #fbbf24;
+            line-height: 1.5;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            padding: 24px;
+            color: var(--text-secondary);
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        footer p:first-child {
+            margin-bottom: 4px;
+        }
+
+        /* View States */
+        .view {
+            display: none;
+            animation: fadeIn 0.3s ease;
+        }
+
+        .view.active {
+            display: block;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* Responsive */
+        @media (max-width: 480px) {
+            .container {
+                padding: 16px;
+            }
+
+            .amount-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .header-icon, .selection-icon {
+                width: 48px;
+                height: 48px;
+                font-size: 24px;
+            }
+
+            .party-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 20px;
+            }
+
+            .percentage {
+                font-size: 20px;
+            }
+        }
+
+        /* Loading State */
+        .loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+
+        .spinner {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255,255,255,.3);
+            border-radius: 50%;
+            border-top-color: white;
+            animation: spin 1s ease-in-out infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- View 1: Party Selection -->
+        <div id="view-home" class="view active">
+            <div class="header-card">
+                <div class="header-icon">🗳️</div>
+                <div class="header-content">
+                    <h1>Tamil Nadu Legislative Assembly Election Winner</h1>
+                    <p>Who will win the 2026 TN Assembly Elections?</p>
+                </div>
+            </div>
+
+            <div class="party-list">
+                <a href="#" class="party-card" onclick="selectParty('DMK', 'Dravida Munnetra Kazhagam', 'dmk', 59)">
+                    <div class="party-info">
+                        <div class="party-icon dmk">🌅</div>
+                        <div class="party-details">
+                            <h3>DMK</h3>
+                            <span>Dravida Munnetra Kazhagam</span>
+                        </div>
+                    </div>
+                    <div class="party-stats">
+                        <div class="percentage">59%</div>
+                        <div class="invested">₹532,950 invested</div>
+                    </div>
+                </a>
+
+                <a href="#" class="party-card" onclick="selectParty('TVK', 'Tamilaga Vetri Kazhagam', 'tvk', 32)">
+                    <div class="party-info">
+                        <div class="party-icon tvk">⭐</div>
+                        <div class="party-details">
+                            <h3>TVK</h3>
+                            <span>Tamilaga Vetri Kazhagam</span>
+                        </div>
+                    </div>
+                    <div class="party-stats">
+                        <div class="percentage">32%</div>
+                        <div class="invested">₹289,080 invested</div>
+                    </div>
+                </a>
+
+                <a href="#" class="party-card" onclick="selectParty('ADMK', 'All India Anna Dravida Munnetra Kazhagam', 'admk', 10)">
+                    <div class="party-info">
+                        <div class="party-icon admk">🍃</div>
+                        <div class="party-details">
+                            <h3>ADMK</h3>
+                            <span>All India Anna Dravida Munnetra Kazhagam</span>
+                        </div>
+                    </div>
+                    <div class="party-stats">
+                        <div class="percentage">10%</div>
+                        <div class="invested">₹90,300 invested</div>
+                    </div>
+                </a>
+
+                <a href="#" class="party-card" onclick="selectParty('NTK', 'Naam Thamizhar Katchi', 'ntk', 1)">
+                    <div class="party-info">
+                        <div class="party-icon ntk">⚡</div>
+                        <div class="party-details">
+                            <h3>NTK</h3>
+                            <span>Naam Thamizhar Katchi</span>
+                        </div>
+                    </div>
+                    <div class="party-stats">
+                        <div class="percentage">1%</div>
+                        <div class="invested">₹9,030 invested</div>
+                    </div>
+                </a>
+
+                <a href="#" class="party-card" onclick="selectParty('Others', 'Other Political Parties', 'others', 2)">
+                    <div class="party-info">
+                        <div class="party-icon others">🌐</div>
+                        <div class="party-details">
+                            <h3>Others</h3>
+                            <span>Other Political Parties</span>
+                        </div>
+                    </div>
+                    <div class="party-stats">
+                        <div class="percentage">2%</div>
+                        <div class="invested">₹18,060 invested</div>
+                    </div>
+                </a>
+            </div>
+        </div>
+
+        <!-- View 2: Bet Amount Selection -->
+        <div id="view-amount" class="view">
+            <a class="back-btn" onclick="showView('view-home')">
+                ← Back
+            </a>
+
+            <div class="selection-header">
+                <div class="selection-icon dmk" id="selected-party-icon">🌅</div>
+                <div class="selection-info">
+                    <h2 id="selected-party-name">DMK</h2>
+                    <p>Your Selection</p>
+                </div>
+            </div>
+
+            <div class="amount-section">
+                <h3>Select Bet Amount</h3>
+                <div class="amount-grid">
+                    <button class="amount-btn active" onclick="selectAmount(100)">₹100</button>
+                    <button class="amount-btn" onclick="selectAmount(500)">₹500</button>
+                    <button class="amount-btn" onclick="selectAmount(1000)">₹1000</button>
+                    <button class="amount-btn" onclick="selectAmount(5000)">₹5000</button>
+                </div>
+                <input type="number" class="custom-amount" placeholder="Custom amount" id="custom-amount" oninput="handleCustomAmount(this.value)">
+            </div>
+
+            <div class="total-section">
+                <span>Total Amount</span>
+                <strong id="total-amount">₹100</strong>
+            </div>
+
+            <button class="btn-primary" onclick="goToDetails()">Place Bet</button>
+        </div>
+
+        <!-- View 3: User Details -->
+        <div id="view-details" class="view">
+            <div class="form-card">
+                <div class="form-header">
+                    <div class="form-icon">📱</div>
+                    <h2>Enter Your Details</h2>
+                    <p>For receiving winnings via UPI</p>
+                </div>
+
+                <div class="selected-party-display">
+                    <div class="selected-party-info">
+                        <div class="selected-party-icon dmk" id="detail-party-icon">🌅</div>
+                        <span id="detail-party-name">DMK</span>
+                    </div>
+                    <div class="selected-amount" id="detail-amount">₹100</div>
+                </div>
+
+                <form id="bet-form" onsubmit="submitBet(event)">
+                    <div class="form-group">
+                        <label>Full Name *</label>
+                        <input type="text" id="full-name" required placeholder="Enter your full name">
+                    </div>
+                    <div class="form-group">
+                        <label>Phone Number *</label>
+                        <input type="tel" id="phone-number" required placeholder="Enter phone number" pattern="[0-9]{10}" maxlength="10">
+                    </div>
+                    <button type="submit" class="btn-success" id="submit-btn">
+                        Submit & View QR Code
+                    </button>
+                </form>
+            </div>
+        </div>
+
+        <!-- View 4: Success/Payment -->
+        <div id="view-success" class="view">
+            <div class="success-card">
+                <div class="success-icon">✓</div>
+                <h2>Bet Placed Successfully!</h2>
+                <p>Please scan the QR code below to complete your payment</p>
+
+                <div class="info-box">
+                    <div class="info-row">
+                        <span>📷 IMPORTANT: Take a screenshot of this page!</span>
+                    </div>
+                    <div class="info-row">
+                        <span>Name:</span>
+                        <span id="success-name">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span>Phone:</span>
+                        <span id="success-phone">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span>Party:</span>
+                        <span id="success-party">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span>Bet Amount:</span>
+                        <span id="success-amount">-</span>
+                    </div>
+                    <div class="info-row">
+                        <span>Potential Win:</span>
+                        <span class="potential-win" id="success-win">-</span>
+                    </div>
+                </div>
+
+                <div class="qr-section">
+                    <canvas id="qr-canvas" width="200" height="200"></canvas>
+                    <p>Scan to pay ₹<span id="qr-amount">100</span></p>
+                </div>
+
+                <div class="upi-box">
+                    <p>Or pay directly to UPI ID:</p>
+                    <div class="upi-id">
+                        <span>tntpollbet@upi</span>
+                        <button class="copy-btn" onclick="copyUPI()">📋</button>
+                    </div>
+                </div>
+
+                <div class="warning-box">
+                    ⚠️ <strong>Note:</strong> Your prediction details are stored and you'll receive your prize once the election results are out on the shared mobile number. Payments are subject to realization. Save your transaction ID somewhere safe. Thanks.
+                </div>
+
+                <button class="btn-primary" onclick="resetAndGoHome()">Done - Place Another Bet</button>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>© 2026 TN Poll. Make money using your political knowledge.</p>
+        <p>Winnings based on assembly election outcomes.</p>
+    </footer>
+
+    <script>
+        // State Management
+        let currentBet = {
+            party: 'DMK',
+            partyFullName: 'Dravida Munnetra Kazhagam',
+            partyClass: 'dmk',
+            partyIcon: '🌅',
+            amount: 100,
+            odds: 1.69
+        };
+
+        // View Navigation
+        function showView(viewId) {
+            document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+            document.getElementById(viewId).classList.add('active');
+            window.scrollTo(0, 0);
+        }
+
+        // Party Selection
+        function selectParty(name, fullName, className, percentage) {
+            currentBet.party = name;
+            currentBet.partyFullName = fullName;
+            currentBet.partyClass = className;
+            
+            // Set icon based on party
+            const icons = {
+                'dmk': '🌅',
+                'tvk': '⭐',
+                'admk': '🍃',
+                'ntk': '⚡',
+                'others': '🌐'
+            };
+            currentBet.partyIcon = icons[className];
+            
+            // Calculate dynamic odds based on percentage (lower % = higher odds)
+            currentBet.odds = (100 / (percentage || 1)).toFixed(2);
+            
+            updateAmountView();
+            showView('view-amount');
+        }
+
+        // Update Amount View
+        function updateAmountView() {
+            document.getElementById('selected-party-name').textContent = currentBet.party;
+            document.getElementById('selected-party-icon').textContent = currentBet.partyIcon;
+            document.getElementById('selected-party-icon').className = `selection-icon ${currentBet.partyClass}`;
+        }
+
+        // Amount Selection
+        function selectAmount(amount) {
+            currentBet.amount = amount;
+            document.getElementById('custom-amount').value = '';
+            document.querySelectorAll('.amount-btn').forEach(btn => {
+                btn.classList.remove('active');
+                if (btn.textContent === `₹${amount}`) {
+                    btn.classList.add('active');
+                }
+            });
+            document.getElementById('total-amount').textContent = `₹${amount}`;
+        }
+
+        function handleCustomAmount(value) {
+            if (value) {
+                currentBet.amount = parseInt(value) || 0;
+                document.querySelectorAll('.amount-btn').forEach(btn => btn.classList.remove('active'));
+                document.getElementById('total-amount').textContent = `₹${currentBet.amount}`;
+            }
+        }
+
+        // Go to Details
+        function goToDetails() {
+            document.getElementById('detail-party-name').textContent = currentBet.party;
+            document.getElementById('detail-party-icon').textContent = currentBet.partyIcon;
+            document.getElementById('detail-party-icon').className = `selected-party-icon ${currentBet.partyClass}`;
+            document.getElementById('detail-amount').textContent = `₹${currentBet.amount}`;
+            showView('view-details');
+        }
+
+        // Generate QR Code (Simple visual representation)
+        function generateQR() {
+            const canvas = document.getElementById('qr-canvas');
+            const ctx = canvas.getContext('2d');
+            
+            // Clear canvas
+            ctx.fillStyle = 'white';
+            ctx.fillRect(0, 0, 200, 200);
+            
+            // Generate QR-like pattern
+            ctx.fillStyle = 'black';
+            const cellSize = 8;
+            
+            // Position patterns (corners)
+            function drawPositionPattern(x, y) {
+                ctx.fillRect(x, y, 7*cellSize, 7*cellSize);
+                ctx.clearRect(x+cellSize, y+cellSize, 5*cellSize, 5*cellSize);
+                ctx.fillRect(x+2*cellSize, y+2*cellSize, 3*cellSize, 3*cellSize);
+            }
+            
+            drawPositionPattern(10, 10);
+            drawPositionPattern(130, 10);
+            drawPositionPattern(10, 130);
+            
+            // Random data pattern
+            for (let i = 0; i < 200; i += cellSize) {
+                for (let j = 0; j < 200; j += cellSize) {
+                    // Skip position patterns
+                    if ((i < 70 && j < 70) || (i > 120 && j < 70) || (i < 70 && j > 120)) continue;
+                    
+                    if (Math.random() > 0.5) {
+                        ctx.fillRect(i, j, cellSize-1, cellSize-1);
+                    }
+                }
+            }
+        }
+
+        // Submit to Google Sheets
+        async function submitBet(e) {
+            e.preventDefault();
+            
+            const name = document.getElementById('full-name').value;
+            const phone = document.getElementById('phone-number').value;
+            const btn = document.getElementById('submit-btn');
+            
+            // Calculate potential win
+            const potentialWin = Math.floor(currentBet.amount * currentBet.odds);
+            
+            // Update success view
+            document.getElementById('success-name').textContent = name;
+            document.getElementById('success-phone').textContent = phone;
+            document.getElementById('success-party').textContent = currentBet.party;
+            document.getElementById('success-amount').textContent = `₹${currentBet.amount}`;
+            document.getElementById('success-win').textContent = `₹${potentialWin}`;
+            document.getElementById('qr-amount').textContent = currentBet.amount;
+            
+            // Show loading
+            btn.classList.add('loading');
+            btn.innerHTML = '<span class="spinner"></span> Processing...';
+            
+            // Prepare data for Google Sheets
+            const data = {
+                timestamp: new Date().toISOString(),
+                name: name,
+                phone: phone,
+                party: currentBet.party,
+                partyFullName: currentBet.partyFullName,
+                amount: currentBet.amount,
+                potentialWin: potentialWin,
+                odds: currentBet.odds
+            };
+            
+            // Google Sheets Web App URL
+            // Replace this with your Google Apps Script Web App URL after deployment
+            const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbxc9dg4zpK0FvrPg6UxOt74xv6p_ODDUmwcBeIaDOt1LsM8psXxNyCWMgOPtc0Skv4W8g/exec';
+            
+            try {
+                // Try to submit to Google Sheets
+                await fetch(GOOGLE_SHEET_URL, {
+                    method: 'POST',
+                    mode: 'no-cors',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(data)
+                });
+            } catch (error) {
+                console.log('Sheet submission:', error);
+                // Continue even if sheet fails (demo mode)
+            }
+            
+            // Also save to localStorage as backup
+            const bets = JSON.parse(localStorage.getItem('tnpoll_bets') || '[]');
+            bets.push(data);
+            localStorage.setItem('tnpoll_bets', JSON.stringify(bets));
+            
+            // Generate QR and show success
+            generateQR();
+            showView('view-success');
+            
+            // Reset button
+            btn.classList.remove('loading');
+            btn.textContent = 'Submit & View QR Code';
+        }
+
+        // Copy UPI ID
+        function copyUPI() {
+            navigator.clipboard.writeText('tntpollbet@upi');
+            alert('UPI ID copied to clipboard!');
+        }
+
+        // Reset and go home
+        function resetAndGoHome() {
+            document.getElementById('bet-form').reset();
+            selectAmount(100);
+            showView('view-home');
+        }
+
+        // Initialize
+        document.addEventListener('DOMContentLoaded', () => {
+            // Check if there's a hash in URL for direct navigation
+            const hash = window.location.hash;
+            if (hash === '#bet') showView('view-amount');
+        });
+    </script>
+</body>
+</html>
